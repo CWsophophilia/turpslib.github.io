@@ -1,0 +1,47 @@
+
+.gallery{
+	
+	display: flex;
+	flex-wrap: wrap;
+	border:1px solid #ccc;
+	justify-content:center;
+	background-color: rgb(255,255,255,0.5);
+	
+}
+
+.box{
+	
+	position:relative;
+	
+	background-color:white;
+	text-align:center;
+	
+	border:1px solid #ccc;
+	min-width:200px;
+	height:auto;
+	margin:1%;
+	
+	transition:.2s;
+}
+
+.big_box{
+	
+	width:30%;
+	
+}
+
+.box:hover{
+	
+	transform:scale(1.1);
+	
+}
+
+.box_desc{
+	
+	-ms-transform:translate(-50%,-50%);
+	transform:translate(0,0);
+	position:absolute;
+	bottom:0;
+	font-size:0.5em;
+	
+}
