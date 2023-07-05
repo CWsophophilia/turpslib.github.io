@@ -21,18 +21,22 @@
 	height:auto;
 	margin:1%;
 	
-	transition:.2s;
+	width:300px;
+	
+	display:inline-block;
+}
+
+.introbox{
+	
+	width:initial;
+	
 }
 
 .big_box{
 	
+	display:inline-block;
+	
 	width:30%;
-	
-}
-
-.box:hover{
-	
-	transform:scale(1.1);
 	
 }
 
@@ -43,5 +47,13 @@
 	position:absolute;
 	bottom:0;
 	font-size:0.5em;
+	
+}
+
+.unit{
+	
+border: thin solid black;
+border-radius:10px;
+	
 	
 }
