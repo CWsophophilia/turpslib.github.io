@@ -1,0 +1,242 @@
+<div style="display:flex;flex-wrap:wrap;">
+<div style="display:flex;flex-direction:column;">
+<canvas id="ctx" width="500" height="500" style="border:1px solid black"></canvas>
+<span id="sizeTxt">Current Size: 500px x 500px</span>
+<div class="resize-handle top-left">www</div>
+</div>
+<div style="display:flex;flex-direction:column;">
+<span>Horizontal Speed</span>
+<div style="display:flex;">
+<input type="range" id="spdXBr" min="-50" max="50" value="10">
+<span id="spdXTxt">10</span>
+</div>
+
+<span>Vertical Speed</span>
+<div style="display:flex;">
+<input type="range" id="spdYBr" min="-50" max="50" value="10">
+<span id="spdYTxt">10</span>
+</div>
+
+<span>Interval</span>
+<div style="display:flex;">
+<input type="range" id="IntrvlBr" min="0" max="50" value="10">
+<span id="IntrvlTxt">10</span>
+</div>
+
+<div class="palette" style="display:flex;">
+<div onclick="colorUpdate('red','H')" style="background-color:red"></div>
+<div onclick="colorUpdate('orange','H')" style="background-color:orange"></div>
+<div onclick="colorUpdate('yellow','H')" style="background-color:yellow"></div>
+<div onclick="colorUpdate('green','H')" style="background-color:green"></div>
+<div onclick="colorUpdate('blue','H')" style="background-color:blue"></div>
+<div onclick="colorUpdate('purple','H')" style="background-color:purple"></div>
+</div>
+<div class="palette" style="display:flex;">
+<div onclick="colorUpdate('white','L')" style="background-color:white"></div>
+<div onclick="colorUpdate('gray1','L')" style="background-color:hsl(0,0%,80%)"></div>
+<div onclick="colorUpdate('gray2','L')" style="background-color:hsl(0,0%,60%)"></div>
+<div onclick="colorUpdate('gray3','L')" style="background-color:hsl(0,0%,40%)"></div>
+<div onclick="colorUpdate('gray4','L')" style="background-color:hsl(0,0%,20%)"></div>
+<div onclick="colorUpdate('black','L')" style="background-color:black"></div>
+</div>
+
+<div style="display:flex;">
+<input type="text" id="MyText" placeholder="Type Your Text Here">
+<button onclick="textUpdate()">Submit</button>
+</div>
+<button onclick="erase()">Erase</button>
+<button onclick="expand()">Expand</button>
+</div>
+</div>
+
+<style>
+.palette div {
+	border-style:solid;
+	border-width : 2px;
+	width:20px;
+	height:20px;
+}
+.palette div:hover {
+	 transform:scale(1.2);
+}
+
+</style>
+
+<script>
+var canvas = document.getElementById('ctx')
+var ctx = canvas.getContext("2d");
+
+var fontsize = 20;
+ctx.font = `${fontsize}px Arial`;
+
+var maxX = document.getElementById('ctx').width;
+var maxY = document.getElementById('ctx').height;
+var maxXText = maxX;
+var maxYText = maxY;
+
+var text = ":3";
+var time = 10;
+
+var x = 5.3;
+var y = 0;
+var hue = 0;
+var sat = 0;
+var lgt = 0;
+var spdX = 10;
+var spdY = 10;
+var spdH = 1;
+var spdS = 1;
+var spdL = 1;
+
+var color = {
+	red : [-25,25],
+	orange : [25,50],
+	yellow : [50,75],
+	green : [75,150],
+	blue : [210,270],
+	purple : [270,330],
+	black : [0,16.7],
+	gray4 : [16.7,33.3],
+	gray3 : [33.3,50],
+	gray2 : [50,66.7],
+	gray1 : [66.7,83.3],
+	white : [83.3,100],
+}
+
+var lowH = 0, highH = 360;
+var lowL = 0, highL = 100;
+
+var i = 0
+
+function incrmtAndBounds(x,icrmt,min,max){
+	x += icrmt;
+	if (x<=min || x>=max){
+	x = Math.min(Math.max(x, min), max);
+	icrmt = -icrmt;
+	}
+	return [x,icrmt];
+}
+
+function update(){
+	[x,spdX] = incrmtAndBounds(x,spdX,0,maxXText);
+	[y,spdY] = incrmtAndBounds(y,spdY,fontsize,maxYText);
+	[hue,spdH] = incrmtAndBounds(hue,spdH,lowH,highH);
+	[sat,spdS] = incrmtAndBounds(sat,spdS,0,100);
+	[lgt,spdL] = incrmtAndBounds(lgt,spdL,lowL,highL);
+    ctx.fillText(text,x,y);
+	ctx.fillStyle = "hsl(" + hue + ","+ sat +"%,"+ lgt +"%)";
+	//console.log(x,y,spdX,spdY,time,maxXText,maxYText);
+}
+
+function textUpdate() {
+	text = document.getElementById('MyText').value;
+	const textMetrics = ctx.measureText(text);
+	maxXText = maxX - textMetrics.width;
+	maxYText = maxY;
+	document.getElementById('MyText').value = ``;
+}
+
+function erase() {
+	ctx.clearRect(0,0,maxX,maxY);
+}
+
+function expand(){
+	const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+	canvas.width += 10;
+	canvas.height += 10;
+	ctx.putImageData(imageData,0, 0);
+	ctx.font = `${fontsize}px Arial`;
+	maxX = document.getElementById('ctx').width;
+	maxY = document.getElementById('ctx').height;
+	const textMetrics = ctx.measureText(text);
+	maxXText = maxX - textMetrics.width;
+	maxYText = maxY;
+	document.getElementById('sizeTxt').textContent = 	`Current Size: ${maxY}px x ${maxX}px`;
+}
+
+function numUpdate(spd,nm) {
+	const br = document.getElementById(nm+"Br");
+	const txt = document.getElementById(nm+"Txt");
+	spd = Math.floor(spd);
+	
+	sign = Math.sign(spd);
+	if (sign == 0) {
+		sign = 1;
+	}
+	spd = sign*parseInt(br.value);
+	txt.textContent = Math.floor(br.value);
+
+	return spd;
+}
+
+function timeUpdate() {
+	time = parseInt(document.getElementById("IntrvlBr").value);
+	clearInterval(intrvl);
+	intrvl = setInterval(update,time);
+}
+
+function colorUpdate(nm,id) {
+	if (id==='H'){lowH = color[nm][0];highH = color[nm][1];};
+	if (id==='L'){lowL = color[nm][0];highL = color[nm][1];};
+	
+}
+
+//--- DRAGGABLE DRAGGABLE DRAGGABLE ---
+
+const resizeHandles = document.querySelectorAll('.resize-handle');
+
+let isResizing = false;
+let initialWidth, initialHeight;
+
+function handleStart(event) {
+  event.preventDefault();
+  isResizing = true;
+
+  // Get the initial size of the canvas
+  initialWidth = canvas.width;
+  initialHeight = canvas.height;
+}
+
+function handleMove(event) {
+  if (!isResizing) return;
+
+  event.preventDefault();
+
+  // Get the current mouse position
+  const clientX = event.clientX;
+  const clientY = event.clientY;
+
+  // Calculate the new size of the canvas
+  const newWidth = initialWidth + (clientX - canvas.offsetLeft);
+  const newHeight = initialHeight + (clientY - canvas.offsetTop);
+
+  // Set the new size of the canvas
+  canvas.width = newWidth;
+  canvas.height = newHeight;
+}
+
+function handleEnd(event) {
+  event.preventDefault();
+  isResizing = false;
+}
+
+// Add event listeners to start, move, and end resizing
+resizeHandles.forEach(handle => {
+  handle.addEventListener('mousedown', handleStart);
+  handle.addEventListener('mousemove', handleMove);
+  handle.addEventListener('mouseup', handleEnd);
+});
+
+//--- DRAGGABLE DRAGGABLE DRAGGABLE ---
+
+spdXBr.addEventListener("input",function(){spdX = numUpdate(spdX,"spdX")});
+spdYBr.addEventListener("input",function(){spdY = numUpdate(spdY,"spdY")});
+
+IntrvlBr.addEventListener("input",timeUpdate);
+
+const txtBr = document.getElementById('MyText');
+txtBr.addEventListener('keydown', function(){if (event.keyCode === 13){textUpdate();}});
+
+
+intrvl = setInterval(update,time);
+</script>

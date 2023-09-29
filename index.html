@@ -1,10 +1,129 @@
 <html>
 
 <head>
-<link rel="stylesheet" type="text/css" href="index_style.css">
+<style>
+@font-face{
+	font-family: 'Calisto';
+	src: url("fonts/CALIST.TTF") ;
+}
+
+body {
+	
+	background-color:rgb(136,0,21);
+	font-family: 'Calisto';
+	
+	}
+
+h1 {
+	text-align:center;
+	font-family: 'Calisto';
+	}
+
+h2 {
+	text-align:center;
+	}
+
+
+p {text-align:center}
+
+img {
+	
+	display:block;
+	border: 1px solid #ddd;
+	padding: 2%;
+	
+	width: 96%;
+	
+	}
+	
+.figure {
+	
+	display: table;
+	text-align: center;
+	color: gray;
+	background-color: black;
+	margin: auto;
+	
+	width:10vw;
+	min-width:20%;
+}
+
+.big {
+	background-color: rgb(239,228,176);
+	box-shadow: rgba(0, 0, 0, 0.8) 0px 10px 36px 0px, rgba(0, 0, 0, 0.8) 0px 0px 0px 1px;
+	padding: 5%;
+	margin:5%;
+	
+}
+
+.item {
+	flex-wrap: wrap;
+	display: flex;
+	justify-content: center;
+	align-content:center;
+	background-color: rgb(150,150,150);
+	font-size:20px;
+}
+
+.item-1 {
+	grid-area: about;
+	
+}
+
+.item-2 {
+	grid-area: rpg;
+}
+
+.item-3 {
+	grid-area: Bouncer;
+}
+
+.container {
+	
+	margin: auto;
+	margin-top:5%;
+	padding: 5%;
+	width: 50%;
+	height: 60vh;
+	background-color: rgb(100,100,100);
+	
+	display:grid;
+	grid-gap: 2%;
+	grid-template-columns: repeat(3,33%);
+	grid-template-rows: repeat(3,33%);
+	grid-template-areas:
+	"about about rpg"
+	"about about rpg"
+	"Bouncer Bouncer tbd";
+	
+	position:relative;
+	
+}
+
+.top_toolbar {
+
+	height:auto;
+	background-color: rgb(239,228,176);
+	margin: 0px;
+
+}
+
+.top_toolbar img {
+	aspect-ratio: initial;
+	height:20%;
+	max-height: 20px;
+	max-width: 20px;
+	vertical-align: top;
+}
+</style>
 </head>
 
 <body>
+
+<div class="top_toolbar">
+	<p>login with</p>
+	<img src="icons/github-mark.svg" alt="Github Icon">
+</div>
 
 <div class="big">
 	<h2>Welcome to</h2>
@@ -17,21 +136,10 @@
 	</div>
 
 	<div class="container">
-		<div class="item-1"><a href="about.html">About</a></div>
-		<div class="item-2"><a href="1.html">RPGMaker Iceberg</a></div>
+		<div class="item item-1"><a href="about.html">About</a></div>
+		<div class="item item-2"><a href="1.html">RPGMaker Iceberg</a></div>
+		<div class="item item-3"><a href="Bouncer.html">Bouncer</a></div>
 	</div>
-<link rel="stylesheet" type="text/css" href="main_style.css">
-</head>
-
-<body>
-<h2>Welcome to</h2>
-<h1>Turpentine Library</h1>
-<p>This is my personal blog.</p>
-
-<div class="figure">
-	<img src="images/Turpentine_distilled_old_way.jpg" alt="Turpentine">
-	<div>This is a jar of turpentine.</div>
-</div>
 
 </body>
 
