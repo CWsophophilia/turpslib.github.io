@@ -8,36 +8,20 @@
 }
 
 body {
-	
-	background-color:rgb(136,0,21);
+	background-image:url('./images/background.jpg');
+	background-attachment: fixed;
 	font-family: 'Calisto';
-	
-	}
+	margin: 0px;}
 
 h1 {
 	text-align:center;
-	font-family: 'Calisto';
-	}
+	font-family: 'Calisto';}
 
 h2 {
-	text-align:center;
-	}
+	text-align:center;}
 
-
-p {text-align:center}
-
-img {
-	
-	display:block;
-	border: 1px solid #ddd;
-	padding: 2%;
-	
-	width: 96%;
-	
-	}
 	
 .figure {
-	
 	display: table;
 	text-align: center;
 	color: gray;
@@ -45,16 +29,8 @@ img {
 	margin: auto;
 	
 	width:10vw;
-	min-width:20%;
-}
+	min-width:20%;}
 
-.big {
-	background-color: rgb(239,228,176);
-	box-shadow: rgba(0, 0, 0, 0.8) 0px 10px 36px 0px, rgba(0, 0, 0, 0.8) 0px 0px 0px 1px;
-	padding: 5%;
-	margin:5%;
-	
-}
 
 .item {
 	flex-wrap: wrap;
@@ -62,87 +38,197 @@ img {
 	justify-content: center;
 	align-content:center;
 	background-color: rgb(150,150,150);
-	font-size:20px;
-}
-
-.item-1 {
-	grid-area: about;
-	
-}
-
-.item-2 {
-	grid-area: rpg;
-}
-
-.item-3 {
-	grid-area: Bouncer;
-}
+	font-size:20px;}
 
 .container {
+	margin-left:auto;
+	margin-right:auto;}
 	
-	margin: auto;
-	margin-top:5%;
-	padding: 5%;
-	width: 50%;
-	height: 60vh;
-	background-color: rgb(100,100,100);
+table {
+	width:500px;
+	border-bottom:1px solid black;
+	border-collapse: collapse;}
 	
-	display:grid;
-	grid-gap: 2%;
-	grid-template-columns: repeat(3,33%);
-	grid-template-rows: repeat(3,33%);
-	grid-template-areas:
-	"about about rpg"
-	"about about rpg"
-	"Bouncer Bouncer tbd";
-	
-	position:relative;
-	
+tr:nth-child(1){
+	border-bottom:1px solid black;
+	font-style: italic;
+	font-size:12px;
 }
+
+tr:nth-child(even) {
+background-color: #DDD;
+}
+
+.icon {
+	position: relative;	
+	height:20px;
+	width:20px;}
+
+.p {
+	color:#666;
+	font-family:sans-serif;
+	text-align:center;
+	margin:2%;
+	margin-left:10%;
+	margin-right:10%;}
+
+a {
+color:black;
+text-decoration:underine;	}
+
+a:hover {
+color:darkred;
+text-decoration:underline;}
+
+table a {
+color:black;
+text-decoration:none;}
+
+table a:hover{
+color:darkred;
+text-decoration:none;}
+
+table .tbd a, table .tbd td {
+color:#AAA;}
 
 .top_toolbar {
-
-	height:auto;
+	height:80px;
 	background-color: rgb(239,228,176);
-	margin: 0px;
+	border-bottom:3px solid black;}
 
+.top_toolbar a {
+color:darkred;
+text-decoration:none;}
+
+.top_toolbar a:hover {
+color:white;
+background-color:darkred;
+text-decoration:none;
+cursor:pointer}
+
+.dropdown img{
+vertical-align:middle;}
+
+.dropdown .dropdown-content a{
+padding:5px}
+
+
+.dropdown {
+display:inline;
+overflow:hidden;
+vertical-align:top;
+width:200px}
+
+.dropdown-content a {
+padding:5px;
+margin:5px;
+display: block;}
+
+.dropdown .dropdown-content {
+display:none;
+position:absolute;
+background-color:white;
+width:inherit;
+z-index:1;}
+
+.dropdown:hover .dropdown-content {
+display:block;}
+
+.dropdown span {
+display:flex;
+align-items:center;
 }
 
-.top_toolbar img {
-	aspect-ratio: initial;
-	height:20%;
-	max-height: 20px;
-	max-width: 20px;
-	vertical-align: top;
-}
+.dropdown span:hover {
+background-color:darkred;}
+
+.dropdown span:hover a{
+color:white;}
+
+
 </style>
 </head>
 
 <body>
 
 <div class="top_toolbar">
-	<a href="login/login.html">login with email</a>
-	<a href="login/signup.php">sign up with email</a>
-	<p>login with</p>
-	<img src="icons/github-mark.svg" alt="Github Icon">
+	<strong style="font-size:30px">Turpentine Library</strong>
+	</br>
+	<div style="display:flex;justify-content:right">
+		<div class="dropdown">
+			<img src="icons/account.png" class="icon" alt="Account Icon">
+			<a>Account</a>
+			<div class='dropdown-content'>
+				<span>
+				<img src="icons/github-mark.svg" class="icon" alt="Github Icon">
+				<a href="login/login.html">login with email</a></br>
+				</span>
+				<span>
+				<img src="icons/email.png" class="icon" alt="Email Icon">
+				<a href="login/signup.php">login with Github</a>
+				</span>
+			</div>
+		</div>
+		<div class="dropdown">
+			<img src="icons/internet.png" class="icon" alt="Language Icon">
+			<a>Languages</a>
+			<div class='dropdown-content'>
+			<span>
+				<img src="icons/uk.png" class="icon" alt="UK Icon">
+				<a href="login/login.html">English</a></br>
+			</span>
+			<span>
+				<img src="icons/china.png" class="icon" alt="China Icon">
+				<a href="login/signup.php">Chinese</a>
+			<span>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="big">
-	<h2>Welcome to</h2>
-	<h1>Turpentine Library</h1>
-	<p>This is my personal blog.</p>
+	<section class="p">
+	This is my personal blog, an archive of all my relevant projects. </br> Current layout style is an imitation to Mortis Ghost's <a href="http://gaarabis.free.fr/">gaarabis.free.fr</a>.
+	</section>
 
-	<div class="figure">
-		<img src="images/0.png" alt="Turpentine">
-		<div>This is a jar of turpentine.</div>
-	</div>
-
-	<div class="container">
-		<div class="item item-1"><a href="about.html">About</a></div>
-		<div class="item item-2"><a href="1.html">RPGMaker Iceberg</a></div>
-		<div class="item item-3"><a href="Bouncer.html">Bouncer</a></div>
-	</div>
-
-</body>
+	<table class="container">
+		<tbody>
+			<tr>
+				<td>NAME</td>
+				<td>TAG</td>
+				<td>DATE</td>
+			</tr>
+			<tr>
+				<td><a href="about.html">About</a></td>
+				<td>Text</td>
+				<td></td>
+			</tr>
+			<tr>
+				<td><a href="1.html">RPGMaker Iceberg</a></td>
+				<td>Text</td>
+				<td></td>
+			</tr>
+			<tr>
+			<td>
+				<a href="Bouncer.html">Bouncer</a>
+				<td>Widget</td>
+				<td></td>
+			</td>
+			</tr>
+			<tr class="tbd">
+			<td>
+				<a href=#>Strategy Game</a>
+				<td>Game</td>
+				<td>tbd</td>
+			</td>
+			</tr>
+			<tr class="tbd">
+			<td>
+				<a href=#>Study Notes</a>
+				<td>Text</td>
+				<td>tbd</td>
+			</td>
+			</tr>
+		</tbody>
+	</table>
 
 </html>
